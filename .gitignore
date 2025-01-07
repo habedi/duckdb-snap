@@ -73,3 +73,8 @@ poetry.lock
 
 # Miscellaneous files and directories to ignore
 # Add any additional file patterns a directory names that should be ignored down here
+stage/
+prime/
+*.snap
+test.csv
+snap/

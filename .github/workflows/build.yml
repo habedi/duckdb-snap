@@ -1,0 +1,31 @@
+name: Build
+
+on:
+    workflow_dispatch: # Only enable manual runs for now
+
+jobs:
+    build:
+        runs-on: ubuntu-latest
+        steps:
+            # Step 1: Checkout the repository
+            -   name: Checkout repository
+                uses: actions/checkout@v4
+
+            # Step 2: Prepare Build Environment
+            -   name: Prepare Environment
+                run: |
+                    bash build.sh --just-prepare
+
+            # Step 3: Set up Snapcraft
+            -   name: Set up Snapcraft
+                uses: snapcore/action-build@v1
+                id: build
+                with:
+                    snapcraft-channel: stable
+
+            # Step 4: Validate the built Snap
+            -   name: Validate Snap
+                uses: diddlesnaps/snapcraft-review-action@v1
+                with:
+                    snap: ${{ steps.build.outputs.snap }}
+                    isClassic: 'false'
