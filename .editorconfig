@@ -16,7 +16,3 @@ trim_trailing_whitespace = true # Remove trailing whitespace
 [*.md]
 trim_trailing_whitespace = false # Don't remove trailing whitespace in Markdown files
 max_line_length = 120
-
-# YAML files
-[*.{yml,yaml}]
-indent_size = 4
