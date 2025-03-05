@@ -1,0 +1,55 @@
+name: duckdb
+version: '1.2.1'
+summary: DuckDB CLI
+description: |
+    DuckDB is an embeddable SQL OLAP database management system.
+    It is designed to handle analytical workloads with high performance on modern hardware.
+    DuckDB is based on a columnar storage model, designed for vectorized query execution, and has fully ACID-compliant
+    transactions.
+
+    **Quick Start**:
+    - Launch the DuckDB CLI: `duckdb`
+    - Check the version: `select version();`
+    - Read a CSV file: `select * from read_csv_auto('my_file.csv') limit 100;`
+
+    **Important Notes**:
+    - This is an unofficial Snap package for DuckDB.
+    - DuckDB is a trademark of the DuckDB Foundation.
+
+base: core24
+confinement: strict
+grade: stable
+compression: lzo
+assumes:
+    - snapd2.54  # Minimum version of Snapd required
+
+license: MIT
+website: https://duckdb.org
+contact: https://github.com/habedi
+source-code: https://github.com/duckdb/duckdb
+issues: [ https://github.com/duckdb/duckdb/issues, https://github.com/habedi/duckdb-snap/issues ]
+
+parts:
+    duckdb:
+        plugin: dump
+        source: https://github.com/duckdb/duckdb/releases/download/v1.2.1/duckdb_cli-linux-amd64.zip
+        source-type: zip
+        source-checksum: sha256/72c038a8a2a6647c68ed0e0df6aa47160c03f021917019ee135f07f9c4635afa
+        override-build: |
+            cp $SNAPCRAFT_PART_SRC/duckdb $SNAPCRAFT_PART_INSTALL/duckdb
+            curl -o LICENSE https://raw.githubusercontent.com/duckdb/duckdb/main/LICENSE
+            cp LICENSE $SNAPCRAFT_PART_INSTALL/LICENSE
+        stage:
+            - duckdb
+            - LICENSE
+
+apps:
+    duckdb:
+        command: duckdb
+        aliases: [ duckdb-cli ]  # Optional alias for the command
+        plugs:
+            - home
+            - removable-media
+            - network
+            - network-bind
+            - system-observe
