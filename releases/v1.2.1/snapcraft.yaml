@@ -1,5 +1,5 @@
 name: duckdb
-version: '1.2.0'
+version: '1.2.1'
 summary: DuckDB CLI
 description: |
     DuckDB is an embeddable SQL OLAP database management system.
@@ -32,9 +32,9 @@ issues: [ https://github.com/duckdb/duckdb/issues, https://github.com/habedi/duc
 parts:
     duckdb:
         plugin: dump
-        source: https://github.com/duckdb/duckdb/releases/download/v1.2.0/duckdb_cli-linux-amd64.zip
+        source: https://github.com/duckdb/duckdb/releases/download/v1.2.1/duckdb_cli-linux-amd64.zip
         source-type: zip
-        source-checksum: sha256/5221744caf224994bf563bff8e8bd039a9b63437ef05ccfdcc14d2c1cece8d3e
+        source-checksum: sha256/72c038a8a2a6647c68ed0e0df6aa47160c03f021917019ee135f07f9c4635afa
         override-build: |
             cp $SNAPCRAFT_PART_SRC/duckdb $SNAPCRAFT_PART_INSTALL/duckdb
             curl -o LICENSE https://raw.githubusercontent.com/duckdb/duckdb/main/LICENSE

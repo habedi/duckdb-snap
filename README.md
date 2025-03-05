@@ -25,9 +25,9 @@ sudo snap install duckdb --stable
 ```
 
 ```bash
-# Manually connect the removable-media interface to access files on removable media
-# (if you get `permission denied errors` when trying to access files outside the home directory)
+# Run the commands below if you encounter permission errors while using the DuckDB shell
 sudo snap connect duckdb:removable-media
+sudo snap connect duckdb:system-observe 
 ```
 
 ## Development
